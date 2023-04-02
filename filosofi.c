@@ -23,6 +23,16 @@ void prendeForchetta(int filosofi);
 void lasciaForchetta(int filosofi);
 void* filosofo(void* num);
 
+void verifica(int filosofi){
+	if (stato[filosofi] == AFFAMATO && stato[SINISTRA] != MANGIA && stato[DESTRA] != MANGIA) {
+		stato[filosofi] = MANGIA;
+	        sleep(1);
+		printf("Filosofo %d prende le forchette %d e %d\n", filosofi +1, SINISTRA+1, filosofi+1);
+		printf("Filosofo %d MANGIA\n", filosofi+1);
+		sem_post(&F[filosofi]);
+	}
+}
+
 void prendeForchetta(int filosofi){
     sem_wait(&mutex);
     stato[filosofi] = AFFAMATO;
