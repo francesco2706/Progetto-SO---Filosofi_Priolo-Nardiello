@@ -33,6 +33,16 @@ void verifica(int filosofi){
 	}
 }
 
+void lasciaForchetta(int filosofi){
+	sem_wait(&mutex);
+	stato[filosofi] = PENSA;
+	printf("Filosofo %d lascia le forchette %d e %d \n",filosofi+1, SINISTRA+1, filosofi+1);
+	printf("Filosofo %d PENSA\n", filosofi+1);
+	verifica(SINISTRA);
+	verifica(DESTRA);
+	sem_post(&mutex);
+}
+
 void prendeForchetta(int filosofi){
     sem_wait(&mutex);
     stato[filosofi] = AFFAMATO;
